@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CHRISTMAS vs MANALO Defense: Manalo Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="menu-overlay" class="overlay">
+        <h1 style="color: #4CAF50; font-size: 40px; text-shadow: 2px 2px #000;">CHRISTMAS vs MANALO DEFENSE: Manalo Edition</h1>
+        <button class="menu-btn" onclick="startGame()">START GAME</button>
+    </div>
+
+    <div id="victory-overlay" class="overlay" style="display:none; background: rgba(0, 40, 0, 0.95);">
+        <h1 class="victory-text">Manalo suckscess</h1>
+        <p style="color: white; font-size: 18px;">House Defended!</p>
+        <button class="menu-btn" onclick="location.reload()" style="background: #2e7d32;">PLAY AGAIN</button>
+    </div>
+
+    <div id="gameover-overlay" class="overlay" style="display:none;">
+        <h1 class="game-over-text">Subukan muli upang Manalo</h1>
+        <p id="final-stats" style="color: white; font-size: 20px;"></p>
+        <button class="menu-btn" onclick="location.reload()" style="background: #a31a1a;">RETRY</button>
+    </div>
+
+    <div id="ui-bar">
+        <div id="stats-container">
+            <div class="stat-box" style="color: gold;">☀️ <span id="sun-count">100</span></div>
+            <div class="stat-box" style="color: #ff4d4d;">💀 <span id="kill-count">0</span>/65</div>
+        </div>
+        
+        <div class="plant-choice selected" onclick="selectPlant('sunflower')" id="btn-sunflower">
+            <img src="imahe/sunflower.jpg"><span>20</span>
+        </div>
+        <div class="plant-choice" onclick="selectPlant('shooter')" id="btn-shooter">
+            <img src="imahe/Shooter1.png"><span>100</span>
+        </div>
+        <div class="plant-choice" onclick="selectPlant('shooter2')" id="btn-shooter2">
+            <img src="imahe/Shooter 2.jpg"><span>120</span>
+        </div>
+        <div class="plant-choice" onclick="selectPlant('shooter3')" id="btn-shooter3">
+            <img src="imahe/Shooooter.jpg"><span>500</span>
+        </div>
+        <div class="plant-choice" onclick="selectPlant('remove')" id="btn-remove" style="background: #400;">
+            <span>Shovel</span>
+        </div>
+    </div>
+    
+    <canvas id="gameCanvas"></canvas>
+    <script src="script.js"></script>
+</body>
+</html>
