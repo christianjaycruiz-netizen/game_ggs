@@ -49,25 +49,25 @@ class Defender {
 class Attacker {
     constructor(y, type) {
         this.x = canvas.width; this.y = y; this.type = type;
-        let lvl2 = totalKills >= 25, rage = totalKills >= 40, boss = totalKills >= 50;
-        this.dmg = boss ? 55 : (rage ? 40 : 20);
+        let lvl2 = totalKills >= 25, rage = totalKills >= 30, boss = totalKills >= 31;
+        this.dmg = boss ? 100 : (rage ? 40 : 20);
         let hpAdd = boss ? 150 : 0;
         if (this.type === 'zombie2') {
-            this.maxHealth = (boss ? 650 : 500) + hpAdd;
+            this.maxHealth = (boss ? 700 : 750 ) + hpAdd;
             this.speed = boss ? 1.0 : (rage ? 0.9 : 0.4);
         } else {
-            this.maxHealth = (boss ? 400 : 200) + hpAdd;
+            this.maxHealth = (boss ? 650 : 650) + hpAdd;
             this.speed = boss ? 1.2 : (rage ? 1.1 : 0.5);
         }
         this.health = this.maxHealth; this.freezeTimer = 0;
     }
     draw() {
         ctx.save();
-        if (totalKills >= 50) { ctx.shadowBlur = 15; ctx.shadowColor = "gold"; }
+        if (totalKills >= 100) { ctx.shadowBlur = 15; ctx.shadowColor = "gold"; }
         if (this.freezeTimer > 0) ctx.filter = 'hue-rotate(180deg) brightness(1.2)';
         if (images[this.type]?.complete) ctx.drawImage(images[this.type], this.x, this.y+5, 70, 70);
         ctx.fillStyle = 'red'; ctx.fillRect(this.x+10, this.y, 60, 5);
-        ctx.fillStyle = totalKills >= 50 ? 'gold' : 'lime';
+        ctx.fillStyle = totalKills >= 100 ? 'gold' : 'lime';
         ctx.fillRect(this.x+10, this.y, (this.health/this.maxHealth)*60, 5);
         ctx.restore();
     }
@@ -124,7 +124,7 @@ function animate() {
             attackers.forEach(a => {
                 if (p.x < a.x+70 && p.x > a.x && p.y > a.y && p.y < a.y+70) {
                     a.health -= p.dmg;
-                    if (p.effect === 'freeze') a.freezeTimer = (totalKills >= 50) ? 20 : 60;
+                    if (p.effect === 'freeze') a.freezeTimer = (totalKills >= 30) ? 20 : 60;
                     projectiles.splice(i, 1);
                 }
             });
@@ -138,9 +138,9 @@ function animate() {
                 attackers.splice(i, 1); totalKills++; 
                 document.getElementById('kill-count').innerText = totalKills;
                 if (totalKills === 25) { notificationText = "EVOLVED"; notificationTimer = 120; }
-                if (totalKills === 40) { notificationText = "RAGE MODE!"; notificationTimer = 120; }
-                if (totalKills === 50) { notificationText = "FINAL PHASE"; notificationTimer = 120; }
-                if (totalKills >= 100) { gameActive = false; document.getElementById('victory-overlay').style.display = 'flex'; }
+                if (totalKills === 30) { notificationText = "RAGE MODE!"; notificationTimer = 120; }
+                if (totalKills === 35) { notificationText = "FINAL PHASE"; notificationTimer = 120; }
+                if (totalKills >= 400) { gameActive = false; document.getElementById('victory-overlay').style.display = 'flex'; }
             }
             if (a.x < 0) { gameActive = false; document.getElementById('gameover-overlay').style.display = 'flex'; document.getElementById('final-stats').innerText = "Kills: " + totalKills; }
         });
@@ -158,3 +158,4 @@ function animate() {
     requestAnimationFrame(animate);
 
 }
+
