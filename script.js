@@ -100,7 +100,7 @@ function handleInput(e) {
     const y = Math.floor(((clientY - rect.top) * scaleY) / 80) * 80;
     if (currentChoice === 'remove') defenders = defenders.filter(d => !(d.x === x && d.y === y));
     else {
-        const costs = { sunflower: 20, shooter: 100, shooter2: 120, shooter3: 500 };
+        const costs = { sunflower: 20, shooter: 100, shooter2: 250, shooter3: 500 };
         if (sunMoney >= costs[currentChoice] && !defenders.find(d => d.x === x && d.y === y)) {
             defenders.push(new Defender(x, y, currentChoice));
             sunMoney -= costs[currentChoice]; document.getElementById('sun-count').innerText = sunMoney;
@@ -140,7 +140,7 @@ function animate() {
                 if (totalKills === 25) { notificationText = "EVOLVED"; notificationTimer = 120; }
                 if (totalKills === 40) { notificationText = "RAGE MODE!"; notificationTimer = 120; }
                 if (totalKills === 50) { notificationText = "FINAL PHASE"; notificationTimer = 120; }
-                if (totalKills >= 65) { gameActive = false; document.getElementById('victory-overlay').style.display = 'flex'; }
+                if (totalKills >= 100) { gameActive = false; document.getElementById('victory-overlay').style.display = 'flex'; }
             }
             if (a.x < 0) { gameActive = false; document.getElementById('gameover-overlay').style.display = 'flex'; document.getElementById('final-stats').innerText = "Kills: " + totalKills; }
         });
@@ -156,4 +156,5 @@ function animate() {
         frame++;
     }
     requestAnimationFrame(animate);
+
 }
