@@ -41,7 +41,7 @@ class Defender {
             if (this.type === 'shooter3' && frame % 40 === 0) projectiles.push(new Bullet(this.x+60, this.y+30, 8, images.bullet3, 50, 'fire'));
         }
         if (this.type === 'sunflower' && ++this.timer % 300 === 0) {
-            sunMoney += 24; document.getElementById('sun-count').innerText = sunMoney;
+            sunMoney += 50; document.getElementById('sun-count').innerText = sunMoney;
         }
     }
 }
@@ -158,4 +158,5 @@ function animate() {
     requestAnimationFrame(animate);
 
 }
+
 
